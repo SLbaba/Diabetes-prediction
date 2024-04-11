@@ -16,12 +16,7 @@ imbalance_method_list = [
     "SMOTENC",
     "KMeansSMOTE",
     "RandomUnderSampler",
-    "ClusterCentroids",
     "NearMiss",
-    "CondensedNearestNeighbour",
-    "EditedNearestNeighbours",
-    "RepeatedEditedNearestNeighbours",
-    "AllKNN",
     "TomekLinks",
     "OneSidedSelection",
     "NeighbourhoodCleaningRule",
@@ -29,6 +24,19 @@ imbalance_method_list = [
     "SMOTETomek",
     "SMOTEENN"
 ]
+
+# 数据集路径
+dataset_path = "dataset/diabetes_prediction_dataset_label_encoded.csv"
+
+def load_dataset(dataset_path):
+    """
+    加载数据集。
+    参数:
+        dataset_path: 数据集的文件路径。
+    返回:
+        pandas DataFrame: 加载的数据集。
+    """
+    return pd.read_csv(dataset_path)
 
 def calculate_metrics(y_true, y_pred):
     """
@@ -87,29 +95,19 @@ def perform_cross_validation(X, y, model, imbalance_method=None):
     elif imbalance_method == 'SVMSMOTE':
         imbalance_processor = SVMSMOTE(random_state=20216074, sampling_strategy=0.15)
     elif imbalance_method == 'SMOTENC':
-        imbalance_processor = SMOTENC(random_state=20216074, sampling_strategy=0.15)
+        imbalance_processor = SMOTENC(random_state=20216074,categorical_features=[0,4,3,5], sampling_strategy=0.15)
     elif imbalance_method == 'KMeansSMOTE':
         imbalance_processor = KMeansSMOTE(random_state=20216074, kmeans_estimator=KMeans(n_clusters=35, random_state=20216074),sampling_strategy=0.15)
     elif imbalance_method == 'RandomUnderSampler':
         imbalance_processor = RandomUnderSampler(random_state=20216074, sampling_strategy=0.15)
-    elif imbalance_method == 'ClusterCentroids':
-        imbalance_processor = ClusterCentroids(random_state=20216074, sampling_strategy=0.15)
     elif imbalance_method == 'NearMiss':
-        imbalance_processor = NearMiss(random_state=20216074, sampling_strategy=0.15)
-    elif imbalance_method == 'CondensedNearestNeighbour':
-        imbalance_processor = CondensedNearestNeighbour(random_state=20216074, sampling_strategy=0.15)
-    elif imbalance_method == 'EditedNearestNeighbours':
-        imbalance_processor = EditedNearestNeighbours(random_state=20216074, sampling_strategy=0.15)
-    elif imbalance_method == 'RepeatedEditedNearestNeighbours':
-        imbalance_processor = RepeatedEditedNearestNeighbours(random_state=20216074, sampling_strategy=0.15)
-    elif imbalance_method == 'AllKNN':
-        imbalance_processor = AllKNN(random_state=20216074, sampling_strategy=0.15)
+        imbalance_processor = NearMiss(sampling_strategy=0.15)
     elif imbalance_method == 'TomekLinks':
-        imbalance_processor = TomekLinks(random_state=20216074, sampling_strategy=0.15)
+        imbalance_processor = TomekLinks()
     elif imbalance_method == 'OneSidedSelection':
-        imbalance_processor = OneSidedSelection(random_state=20216074, sampling_strategy=0.15)
+        imbalance_processor = OneSidedSelection()
     elif imbalance_method == 'NeighbourhoodCleaningRule':
-        imbalance_processor = NeighbourhoodCleaningRule(random_state=20216074, sampling_strategy=0.15)
+        imbalance_processor = NeighbourhoodCleaningRule()
     elif imbalance_method == 'InstanceHardnessThreshold':
         imbalance_processor = InstanceHardnessThreshold(random_state=20216074, sampling_strategy=0.15)
     elif imbalance_method == 'SMOTETomek':
@@ -146,6 +144,7 @@ def perform_cross_validation(X, y, model, imbalance_method=None):
 
     avg_metrics = {key: np.mean([m[key] for m in metrics]) for key in metrics[0]}
     print(f"十折交叉验证平均性能指标: {avg_metrics}")
+    return avg_metrics
 def evaluate_on_test_set(X_test, y_test, model):
     """
     在测试集上评估模型。

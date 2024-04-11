@@ -5,18 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
-from Module import perform_cross_validation, evaluate_on_test_set
-from Module import imbalance_method_list
+from Module import perform_cross_validation, evaluate_on_test_set, imbalance_method_list, load_dataset, dataset_path
 
-def load_dataset(dataset_path):
-    """
-    加载数据集。
-    参数:
-        dataset_path: 数据集的文件路径。
-    返回:
-        pandas DataFrame: 加载的数据集。
-    """
-    return pd.read_csv(dataset_path)
 
 
 def main(model, dataset_path, imbalance_method=None):
@@ -55,8 +45,6 @@ lr_classifier = LogisticRegression(max_iter=10000)
 dt_classifier = DecisionTreeClassifier()
 mlp_classifier = MLPClassifier(max_iter=1000)
 
-# 数据集路径
-dataset_path = "dataset/diabetes_prediction_dataset_label_encoded.csv"
 
 # 将模型和其名称放入一个字典中
 models = {
