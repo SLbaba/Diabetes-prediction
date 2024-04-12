@@ -162,3 +162,6 @@ def evaluate_on_test_set(X_test, y_test, model):
 
     print("测试集上的性能指标:\n", test_metrics)
     print("测试集上的分类报告:\n", classification_report(y_test, y_pred, target_names=['非糖尿病', '糖尿病']))
+
+    # 返回各种指标
+    return test_metrics
