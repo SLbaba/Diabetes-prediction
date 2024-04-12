@@ -55,12 +55,12 @@ models = {
     "MLP": mlp_classifier
 }
 
-# main(xgb_classifier, dataset_path)
+main(xgb_classifier, dataset_path)
 
-for imbalance_method in imbalance_method_list:
-    print(f"Imbalance method: {imbalance_method}")
-    main(xgb_classifier, dataset_path, imbalance_method)
-    print("-------")
+# for imbalance_method in imbalance_method_list:
+#     print(f"Imbalance method: {imbalance_method}")
+#     main(xgb_classifier, dataset_path, imbalance_method)
+#     print("-------")
 
 
 
