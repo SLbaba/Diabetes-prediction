@@ -31,9 +31,9 @@ def plot_results(results):
     plt.plot(methods, accuracy_list, label='Accuracy', marker='o')
     # 显示方格
     plt.grid()
-    plt.xlabel('Imbalance Handling Method')
-    plt.ylabel('Metrics')
-    plt.title('Model Performance by Imbalance Handling Method')
+    plt.xlabel('Imbalance Handling Method', fontsize=15)
+    plt.ylabel('Metrics', fontsize=15)
+    plt.title('Model Performance by Imbalance Handling Method', fontsize=20)
     plt.xticks(rotation=45)
     plt.legend()
     plt.tight_layout()
