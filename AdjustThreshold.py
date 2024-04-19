@@ -62,8 +62,9 @@ plt.xlabel('Classification Threshold')
 plt.ylabel('Metric Value')
 plt.legend()
 plt.grid(True)
-plt.show()
 # 保存图片
 plt.savefig('figure/Threshold-Performance-Metrics.png')
 # 保存npy
 np.save("result/Threshold-Performance-Metrics.npy", [accuracies, precisions_0, recalls_0, f1_scores_0, precisions_1, recalls_1, f1_scores_1])
+# 显示图片
+plt.show()
