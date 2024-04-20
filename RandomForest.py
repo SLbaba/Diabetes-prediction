@@ -76,5 +76,17 @@ for (i, j), val in np.ndenumerate(cm):
     ax.text(j, i, f'{val}', ha='center', va='center', color='black')
 # 保存图片
 plt.savefig('figure/Confusion-Matrix.png')
-# 显示图片
-plt.show()
+
+# 特征重要性分析
+feature_importances = model.feature_importances_
+feature_names = X.columns
+
+# 可视化特征重要性
+plt.figure(figsize=(12, 6))
+plt.barh(feature_names, feature_importances, color='skyblue')
+plt.xlabel('Feature Importance')
+plt.ylabel('Feature Names')
+plt.title('Feature Importance Analysis')
+
+# 保存特征重要图
+plt.savefig('figure/Feature-Importance.png')
